@@ -4,7 +4,6 @@ import com.android.ide.common.symbols.*
 
 import com.google.common.base.Charsets
 import com.google.common.io.Files
-
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -60,7 +59,7 @@ class FatAarPlugin implements Plugin<Project> {
     }
 
     @Override
-    void apply(Project project) {
+     void apply(Project project) {
         initVariables(project)
 
         project.configurations {
@@ -302,7 +301,7 @@ class FatAarPlugin implements Plugin<Project> {
         mergeManifest(mainManifest, libraryManifests, reportFile)
     }
 
-    private void generateRJar(String flavorName, String buildType, String projectName) {
+     void generateRJar(String flavorName, String buildType, String projectName) {
         List<SymbolTable> tableList = new ArrayList<>()
 
         mEmbeddedAarDirs.each {
@@ -311,7 +310,7 @@ class FatAarPlugin implements Plugin<Project> {
                 if (resDir.listFiles() == null) return
 
                 SymbolTable table = ResourceDirectoryParser.parseResourceSourceSetDirectory(
-                        resDir, IdProvider.@Companion.sequential(), null)
+                        resDir, IdProvider.@Companion.sequential(), null, null)
 
                 String aarPackageName = new XmlParser().parse("${aarDir}/AndroidManifest.xml").@package
 
@@ -325,4 +324,6 @@ class FatAarPlugin implements Plugin<Project> {
         String currentPackageName = new XmlParser().parse(new File(build_dir).parent + "/src/main/AndroidManifest.xml").@package
         exportToCompiledJava(tableList, currentPackageName, new File("$packaged_class/$flavorName/$buildType/libs/${projectName}_R.jar").toPath())
     }
+
+
 }

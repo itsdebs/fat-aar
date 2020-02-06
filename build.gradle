@@ -9,7 +9,7 @@ apply plugin: 'java'
 apply plugin: 'groovy'
 
 ext {
-    versionId = '1.1.0'
+    versionId = '1.1.0-SNAPSHOT-DEBA'
     groupId = 'com.cpdroid'
     name = 'fat-aar'
     website = 'https://github.com/cpdroid/fat-aar'
@@ -20,10 +20,10 @@ ext {
 version = ext.versionId
 group = ext.groupId
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-bintray {
+/*bintray {
     user = properties.getProperty('bintrayUser')
     key = properties.getProperty('bintrayApiKey')
     configurations = ['archives']
@@ -37,7 +37,7 @@ bintray {
             name = project.ext.versionId
         }
     }
-}
+}*/
 
 gradlePlugin {
     plugins {
@@ -68,5 +68,5 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.android.tools.build:gradle:3.2.1'
+    implementation 'com.android.tools.build:gradle:3.5.3'
 }
